@@ -161,7 +161,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 4.3062105, y: -0.04685545, z: 4.6394615, w: 3.2079606}
+  m_margin: {x: 4.0340705, y: -0.04685545, z: 4.377401, w: 3.2079606}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 3760883429278716970}
   - component: {fileID: 1025284594}
   - component: {fileID: 2328228614404852177}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CollectableStack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -257,11 +257,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3760883429278716969}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.9781637, z: 9.99211}
-  m_Center: {x: 0, y: 4.000441, z: -2.9780612}
+  m_Size: {x: 1, y: 1.9781637, z: 6.726938}
+  m_Center: {x: 0, y: 4.000441, z: -1.3454764}
 --- !u!1001 &3731206946659531467
 PrefabInstance:
   m_ObjectHideFlags: 0

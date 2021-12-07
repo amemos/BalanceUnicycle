@@ -13,16 +13,22 @@ using UnityEngine;
 public class EventManager
 {
     public static Action                        onReactBack;
-    public static Action<LevelObject, bool>     onWayStackTrigger;
+    public static Action<LevelObject, bool>     onCollectableStackTrigger;
+    public static Action<Vector2>               onSwipe;
     public static Action<int>                   onLevelStarted;
     public static Action<int>                   onLevelCompleted;
     public static Action                        onLevelFailed;
     public static Action                        onLevelEnded;
 
 
-    public static void OnWayStackTrigger(LevelObject levelObject, bool entered)
+    public static void OnCollectableStackTrigger(LevelObject levelObject, bool entered)
     {
-        if (onWayStackTrigger != null) onWayStackTrigger(levelObject, entered);
+        if (onCollectableStackTrigger != null) onCollectableStackTrigger(levelObject, entered);
+    }
+
+    public static void OnSwipe(Vector2 vector2)
+    {
+        if (onSwipe != null) onSwipe(vector2);
     }
 
     public static void LevelStarted(int level)

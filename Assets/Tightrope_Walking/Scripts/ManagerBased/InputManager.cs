@@ -3,6 +3,8 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
+[DefaultExecutionOrder(-2)]
 public class InputManager : Singleton<InputManager>
 {
     private PlayerControls playerControls;
@@ -42,10 +44,13 @@ public class InputManager : Singleton<InputManager>
 
     private void PrimaryContactEnded(InputAction.CallbackContext obj)
     {
-        if (onEnd != null) onStart(Utils.ScreenToWorld(mainCamera, playerControls.Touch.PrimaryPosition.ReadValue<Vector2>()), (float)obj.time);
+        if (onEnd != null) onEnd(Utils.ScreenToWorld(mainCamera, playerControls.Touch.PrimaryPosition.ReadValue<Vector2>()), (float)obj.time);
     }
 
-
+    public Vector2 PrimaryPosition()
+    {
+        return Utils.ScreenToWorld(mainCamera, playerControls.Touch.PrimaryPosition.ReadValue<Vector2>());
+    }
 
 }
 

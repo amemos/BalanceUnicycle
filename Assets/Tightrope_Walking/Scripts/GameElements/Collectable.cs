@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using DG.Tweening;
 
 
 namespace amemo.balanceUnicycle.gameElements
@@ -16,20 +17,24 @@ namespace amemo.balanceUnicycle.gameElements
         private TextMeshPro textMeshPro;
 
         private int stackCount;
+
         public override void Init()
         {
             objectType = ObjectType.E_COLLECTABLE;
 
-            stackCount = Random.Range(-16, 16);
+            stackCount = Random.Range(1, 16);
 
-            EnablePizzaBoxes(stackCount);
+        }
 
-            textMeshPro.text = stackCount.ToString();
-            //textMeshPro.rectTransform.position = new Vector3(0, stackCount * 0.1f * 0);
+        public int GetStackCount()
+        {
+            return stackCount;
         }
 
         private void EnablePizzaBoxes(int count)
         {
+            textMeshPro.text = stackCount.ToString();
+
             if (count <= 0)
                 return;
 
@@ -41,7 +46,20 @@ namespace amemo.balanceUnicycle.gameElements
 
         private void OnTriggerEnter(Collider other)
         {
-            
+            if(other.gameObject.TryGetComponent(out CharacterParent characterParent))
+            {
+                EnablePizzaBoxes(stackCount);
+                EventManager.OnCollectableStackTrigger(this, true);
+            }
+        }
+
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.gameObject.TryGetComponent(out CharacterParent characterParent))
+            {
+                EventManager.OnCollectableStackTrigger(this, false);
+            }
         }
     }
 }

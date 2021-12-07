@@ -1,18 +1,38 @@
+using amemo.balanceUnicycle.singleton;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    // Start is called before the first frame update
-    void Start()
+    private StackManager stackManager;
+    public StackManager StackManager
     {
-        
+        get
+        {
+            return stackManager;
+        }
+        set
+        {
+            stackManager = value;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private CharacterParent characterParent;
+    public CharacterParent CharacterParent
     {
-        
+        get
+        {
+            return characterParent;
+        }
+
+        set
+        {
+            characterParent = value;
+            stackManager.characterParent = value;
+        }
     }
+
+
+
 }
