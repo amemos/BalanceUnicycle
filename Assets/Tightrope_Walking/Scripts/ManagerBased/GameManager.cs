@@ -1,38 +1,40 @@
-using amemo.balanceUnicycle.singleton;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using amemo.balanceUnicycle.gameElements;
+using amemo.balanceUnicycle.structurals.Singleton;
 
-public class GameManager : Singleton<GameManager>
+namespace amemo.balanceUnicycle.structurals
 {
-    private StackManager stackManager;
-    public StackManager StackManager
+    public class GameManager : Singleton<GameManager>
     {
-        get
+        private StackManager stackManager;
+        public StackManager StackManager
         {
-            return stackManager;
+            get
+            {
+                return stackManager;
+            }
+            set
+            {
+                stackManager = value;
+            }
         }
-        set
+
+        private CharacterParent characterParent;
+        public CharacterParent CharacterParent
         {
-            stackManager = value;
+            get
+            {
+                return characterParent;
+            }
+
+            set
+            {
+                characterParent = value;
+                stackManager.characterParent = value;
+            }
         }
+
+
+
     }
-
-    private CharacterParent characterParent;
-    public CharacterParent CharacterParent
-    {
-        get
-        {
-            return characterParent;
-        }
-
-        set
-        {
-            characterParent = value;
-            stackManager.characterParent = value;
-        }
-    }
-
-
-
 }
+

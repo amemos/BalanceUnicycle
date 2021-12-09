@@ -1,78 +1,81 @@
 using amemo.balanceUnicycle.Globals;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using amemo.balanceUnicycle.structurals.events;
 using UnityEngine;
 
-[DefaultExecutionOrder(-1)]
-public class SwipeDetection : MonoBehaviour
+
+namespace amemo.balanceUnicycle.structurals.inputs
 {
-    [SerializeField]
-    private float minimumDistance = .2f;
-    [SerializeField]
-    private float maxTime = 1.0f;
-
-    private InputManager inputManager;
-
-    private Vector2 startPosition;
-    private float startTime;
-
-    private Vector2 endPosition;
-    private float endTime;
-
-
-    void Awake()
+    [DefaultExecutionOrder(-1)]
+    public class SwipeDetection : MonoBehaviour
     {
-        inputManager = InputManager.Instance;
-    }
+        [SerializeField]
+        private float minimumDistance = .2f;
+        [SerializeField]
+        private float maxTime = 1.0f;
 
-    private void OnEnable()
-    {
+        private InputManager inputManager;
 
-        EventManager.onCollectableStackTrigger += EnableSwipeInput;
-    }
+        private Vector2 startPosition;
+        private float startTime;
 
-    private void OnDisable()
-    {
+        private Vector2 endPosition;
+        private float endTime;
 
-        EventManager.onCollectableStackTrigger -= EnableSwipeInput;
-    }
-    public void EnableSwipeInput(LevelObject levelObject, bool entered )
-    {
-        if(entered)
+
+        void Awake()
         {
-            inputManager.onStart += SwipeStart;
-            inputManager.onEnd += SwipeEnd;
-        }
-        else
-        {
-            inputManager.onStart -= SwipeStart;
-            inputManager.onEnd -= SwipeEnd;
+            inputManager = InputManager.Instance;
         }
 
-    }
-
-
-    private void SwipeStart(Vector2 position, float time)
-    {
-        startPosition = position;
-        startTime = time;
-    }
-
-
-    private void SwipeEnd(Vector2 position, float time)
-    {
-        endPosition = position;
-        endTime = time;
-        DetectSwipe();
-    }
-
-    private void DetectSwipe()
-    {
-        if(Vector3.Distance(startPosition, endPosition) >= minimumDistance && (endTime - startTime) <= maxTime)
+        private void OnEnable()
         {
-            EventManager.OnSwipe(endPosition - startPosition);
-            Debug.DrawLine(startPosition, endPosition, Color.red, 5f);
+
+            EventManager.onCollectableStackTrigger += EnableSwipeInput;
+        }
+
+        private void OnDisable()
+        {
+
+            EventManager.onCollectableStackTrigger -= EnableSwipeInput;
+        }
+        public void EnableSwipeInput(LevelObject levelObject, bool entered)
+        {
+            if (entered)
+            {
+                inputManager.onStart += SwipeStart;
+                inputManager.onEnd += SwipeEnd;
+            }
+            else
+            {
+                inputManager.onStart -= SwipeStart;
+                inputManager.onEnd -= SwipeEnd;
+            }
+
+        }
+
+
+        private void SwipeStart(Vector2 position, float time)
+        {
+            startPosition = position;
+            startTime = time;
+        }
+
+
+        private void SwipeEnd(Vector2 position, float time)
+        {
+            endPosition = position;
+            endTime = time;
+            DetectSwipe();
+        }
+
+        private void DetectSwipe()
+        {
+            if (Vector3.Distance(startPosition, endPosition) >= minimumDistance && (endTime - startTime) <= maxTime)
+            {
+                EventManager.OnSwipe(endPosition - startPosition);
+                Debug.DrawLine(startPosition, endPosition, Color.red, 5f);
+            }
         }
     }
 }
+

@@ -1,64 +1,73 @@
-using amemo.balanceUnicycle.singleton;
+using amemo.balanceUnicycle.structurals.Singleton;
+using amemo.balanceUnicycle.utils;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
-[DefaultExecutionOrder(-2)]
-public class InputManager : Singleton<InputManager>
+namespace amemo.balanceUnicycle.structurals.inputs
 {
-    private PlayerControls playerControls;
-    private Camera mainCamera;
-
-    public Action<Vector2, float> onStart;
-    public Action<Vector2, float> onEnd;
-
-    private void Awake()
+    [DefaultExecutionOrder(-2)]
+    public class InputManager : Singleton<InputManager>
     {
-        playerControls = new PlayerControls();
-        mainCamera = Camera.main;
+        private PlayerControls playerControls;
+        private Camera mainCamera;
+
+        public Action<Vector2, float> onStart;
+        public Action<Vector2, float> onEnd;
+
+        private void Awake()
+        {
+            playerControls = new PlayerControls();
+            mainCamera = Camera.main;
+        }
+
+        private void OnEnable()
+        {
+            playerControls.Enable();
+        }
+
+        private void OnDisable()
+        {
+            playerControls.Disable();
+        }
+
+        private void Start()
+        {
+            playerControls.Touch.PrimaryContact.started += PrimaryPositionStarted;
+            playerControls.Touch.PrimaryContact.canceled += PrimaryContactEnded;
+
+        }
+
+        private void PrimaryPositionStarted(InputAction.CallbackContext obj)
+        {
+            if (onStart != null) onStart(Utils.ScreenToWorld(mainCamera, playerControls.Touch.PrimaryPosition.ReadValue<Vector2>()), (float)obj.startTime);
+        }
+
+
+        private void PrimaryContactEnded(InputAction.CallbackContext obj)
+        {
+            if (onEnd != null) onEnd(Utils.ScreenToWorld(mainCamera, playerControls.Touch.PrimaryPosition.ReadValue<Vector2>()), (float)obj.time);
+        }
+
+        public Vector2 PrimaryPosition()
+        {
+            return Utils.ScreenToWorld(mainCamera, playerControls.Touch.PrimaryPosition.ReadValue<Vector2>());
+        }
+
     }
 
-    private void OnEnable()
-    {
-        playerControls.Enable();
-    }
-
-    private void OnDisable()
-    {
-        playerControls.Disable();
-    }
-
-    private void Start()
-    {
-        playerControls.Touch.PrimaryContact.started += PrimaryPositionStarted;
-        playerControls.Touch.PrimaryContact.canceled += PrimaryContactEnded;
-
-    }
-
-    private void PrimaryPositionStarted(InputAction.CallbackContext obj)
-    {
-        if (onStart != null) onStart(Utils.ScreenToWorld(mainCamera, playerControls.Touch.PrimaryPosition.ReadValue<Vector2>()), (float)obj.startTime);
-    }
-
-
-    private void PrimaryContactEnded(InputAction.CallbackContext obj)
-    {
-        if (onEnd != null) onEnd(Utils.ScreenToWorld(mainCamera, playerControls.Touch.PrimaryPosition.ReadValue<Vector2>()), (float)obj.time);
-    }
-
-    public Vector2 PrimaryPosition()
-    {
-        return Utils.ScreenToWorld(mainCamera, playerControls.Touch.PrimaryPosition.ReadValue<Vector2>());
-    }
 
 }
 
-public class Utils : MonoBehaviour
+namespace amemo.balanceUnicycle.utils
 {
-    public static Vector3 ScreenToWorld(Camera camera, Vector3 position)
+    public class Utils : MonoBehaviour
     {
-        position.z = camera.nearClipPlane;
-        return camera.ScreenToWorldPoint(position);
+        public static Vector3 ScreenToWorld(Camera camera, Vector3 position)
+        {
+            position.z = camera.nearClipPlane;
+            return camera.ScreenToWorldPoint(position);
+        }
     }
 }
+

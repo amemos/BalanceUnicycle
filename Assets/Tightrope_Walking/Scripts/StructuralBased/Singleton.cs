@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace amemo.balanceUnicycle.singleton
+namespace amemo.balanceUnicycle.structurals.Singleton
 {
     public class Singleton<T> : BaseMonoBehaviour where T : BaseMonoBehaviour
     {

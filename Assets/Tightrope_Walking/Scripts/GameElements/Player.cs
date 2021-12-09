@@ -1,6 +1,5 @@
 using amemo.balanceUnicycle.Globals;
-using System.Collections;
-using System.Collections.Generic;
+using amemo.balanceUnicycle.structurals.events;
 using UnityEngine;
 
 namespace amemo.balanceUnicycle.gameElements
@@ -9,6 +8,7 @@ namespace amemo.balanceUnicycle.gameElements
     {
         [SerializeField]
         private Animator animator;
+        private Animation animation;
 
         private void OnEnable()
         {
@@ -27,6 +27,11 @@ namespace amemo.balanceUnicycle.gameElements
         public override void Init()
         {
             objectType = ObjectType.E_PLAYER;
+        }
+
+        public void SetLoopPose()
+        {
+           
         }
 
     }

@@ -1,7 +1,9 @@
 using amemo.balanceUnicycle.gameElements;
 using amemo.balanceUnicycle.Globals;
+using amemo.balanceUnicycle.structurals;
+using amemo.balanceUnicycle.structurals.events;
+using amemo.balanceUnicycle.structurals.pooler;
 using DG.Tweening;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -196,7 +198,7 @@ public class StackManager : MonoBehaviour
         if(Time.frameCount % 10 == 0)
         {
             GiveSomeSlope();
-            characterParent.transform.DORotate(Vector3.forward * unbalanceDegree, 0.4f);
+            characterParent.stick.DORotate(Vector3.forward * unbalanceDegree, 0.4f);
         }
             
     }

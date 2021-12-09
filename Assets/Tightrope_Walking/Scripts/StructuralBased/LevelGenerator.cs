@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using amemo.balanceUnicycle.Globals;
 using amemo.balanceUnicycle.gameElements;
+using amemo.balanceUnicycle.structurals.pooler;
 
 namespace amemo.balanceUnicycle.levelGenerator
 {

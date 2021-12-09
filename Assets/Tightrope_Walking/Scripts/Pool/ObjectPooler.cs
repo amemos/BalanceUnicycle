@@ -10,63 +10,68 @@ using amemo.balanceUnicycle.Globals;
 ///  created by: Ahmet Şentürk
 /// </summary>
 /// 
-public class ObjectPooler : MonoBehaviour
+
+namespace amemo.balanceUnicycle.structurals.pooler
 {
-    public static ObjectPooler SharedInstance;
-
-    public List<ObjectPoolItem> itemsToPool;
-
-    public List<GameObject> pooledObjects;
-
-    void Awake()
+    public class ObjectPooler : MonoBehaviour
     {
-        SharedInstance = this;
-    }
+        public static ObjectPooler SharedInstance;
 
+        public List<ObjectPoolItem> itemsToPool;
 
-    void Start()
-    {
-        pooledObjects = new List<GameObject>();
-        foreach (ObjectPoolItem item in itemsToPool)
+        public List<GameObject> pooledObjects;
+
+        void Awake()
         {
-            for (int i = 0; i < item.amountToPool; i++)
-            {
-                GameObject obj = (GameObject)Instantiate(item.objectToPool);
-                obj.SetActive(false);
-                pooledObjects.Add(obj);
-            }
+            SharedInstance = this;
         }
-    }
 
-     
-    public GameObject GetPooledObject(ObjectType type)
-    {
-        for (int i = 0; i < pooledObjects.Count; i++)
+
+        void Start()
         {
-            if (!pooledObjects[i].activeInHierarchy && pooledObjects[i].GetComponent<LevelObject>().GetObjectType() == type)
+            pooledObjects = new List<GameObject>();
+            foreach (ObjectPoolItem item in itemsToPool)
             {
-                return pooledObjects[i];
-            }
-        }
-        foreach (ObjectPoolItem item in itemsToPool)
-        {
-            if (item.objectToPool.GetComponent<LevelObject>().GetObjectType() == type)
-            {
-                if (item.shouldExpand)
+                for (int i = 0; i < item.amountToPool; i++)
                 {
                     GameObject obj = (GameObject)Instantiate(item.objectToPool);
                     obj.SetActive(false);
                     pooledObjects.Add(obj);
-                    return obj;
                 }
             }
         }
-        return null;
-    }
 
-    public void DestroyGameObj(GameObject go)
-    {
-        go.SetActive(false);
-    }
 
+        public GameObject GetPooledObject(ObjectType type)
+        {
+            for (int i = 0; i < pooledObjects.Count; i++)
+            {
+                if (!pooledObjects[i].activeInHierarchy && pooledObjects[i].GetComponent<LevelObject>().GetObjectType() == type)
+                {
+                    return pooledObjects[i];
+                }
+            }
+            foreach (ObjectPoolItem item in itemsToPool)
+            {
+                if (item.objectToPool.GetComponent<LevelObject>().GetObjectType() == type)
+                {
+                    if (item.shouldExpand)
+                    {
+                        GameObject obj = (GameObject)Instantiate(item.objectToPool);
+                        obj.SetActive(false);
+                        pooledObjects.Add(obj);
+                        return obj;
+                    }
+                }
+            }
+            return null;
+        }
+
+        public void DestroyGameObj(GameObject go)
+        {
+            go.SetActive(false);
+        }
+
+    }
 }
+

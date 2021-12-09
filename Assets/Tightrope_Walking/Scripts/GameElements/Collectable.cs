@@ -1,5 +1,5 @@
 using amemo.balanceUnicycle.Globals;
-using System.Collections;
+using amemo.balanceUnicycle.structurals.events;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;

@@ -1,18 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using amemo.balanceUnicycle.structurals.Singleton;
 
-public class AppManager : MonoBehaviour
+namespace amemo.balanceUnicycle.structurals
 {
-    // Start is called before the first frame update
-    void Start()
+    public class AppManager : Singleton<AppManager>
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // implement analytics
+        // implement ads
     }
 }
