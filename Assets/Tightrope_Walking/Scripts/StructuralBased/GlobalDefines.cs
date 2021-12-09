@@ -12,7 +12,8 @@ namespace amemo.balanceUnicycle.Globals
         E_COLLECTABLE,
         E_PIZZA_BOX,
         E_LEVELSTART,
-        E_LEVELEND
+        E_LEVELEND,
+        E_DECOR
     }
 
 

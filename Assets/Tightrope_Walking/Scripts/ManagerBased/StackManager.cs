@@ -72,7 +72,7 @@ public class StackManager : MonoBehaviour
         if (deltaDir.x > 0)
         {
             //Right
-            MoveStack(activeCollectables, characterParent.rightStack[rightStackIndex].position);
+            MoveStack(activeCollectables, characterParent.rightStack[0].position + Vector3.forward * 2);
             rightStackIndex += stackCount;
             if (rightStackIndex < 0) rightStackIndex = 0;
             EnablePizzaBoxes(characterParent.rightStack, rightStackIndex);
@@ -80,7 +80,7 @@ public class StackManager : MonoBehaviour
         else
         {
             //Left
-            MoveStack(activeCollectables, characterParent.leftStack[leftStackIndex].position);
+            MoveStack(activeCollectables, characterParent.leftStack[0].position + Vector3.forward * 2);
             leftStackIndex += stackCount;
             if (leftStackIndex < 0) leftStackIndex = 0;
             EnablePizzaBoxes(characterParent.leftStack, leftStackIndex);
@@ -104,7 +104,7 @@ public class StackManager : MonoBehaviour
                 Transform pizzaBox = ObjectPooler.SharedInstance.GetPooledObject(ObjectType.E_PIZZA_BOX).transform;
                 pizzaBox.transform.position = characterParent.rightStack[i].position;
                 pizzaBox.gameObject.SetActive(true);
-                pizzaBox.DOMoveY(-10, 0.3f).SetDelay(i * 0.05f).OnComplete(()=>
+                pizzaBox.DOMoveY(-5, 0.5f).SetDelay(i * 0.07f).OnComplete(()=>
                 {
                     ObjectPooler.SharedInstance.DestroyGameObj(pizzaBox.gameObject);
                 });
@@ -164,14 +164,22 @@ public class StackManager : MonoBehaviour
 
     private void EnablePizzaBoxes(List<Transform> stack, int activeCount)
     {
+        int activeIndex = 0;
         for (int i = 0; i < stack.Count; i++)
         {
             MeshRenderer meshRenderer = stack[i].GetComponent<MeshRenderer>();
 
-            if(i < activeCount)
-                meshRenderer.enabled = true;
+            if (i < activeCount) {                
+                DOVirtual.DelayedCall(activeIndex * 0.07f, () => {
+                    meshRenderer.enabled = true;
+                });
+
+                if (!meshRenderer.enabled)
+                    activeIndex++;
+            }
             else
                 meshRenderer.enabled = false;
+           
         }
     }
 

@@ -35,7 +35,7 @@ namespace amemo.balanceUnicycle.ui
 
         private void OnIndicatorUpdate(float degree)
         {
-            indicator.eulerAngles = Vector3.Lerp(indicator.eulerAngles, Vector3.forward * degree, Time.deltaTime * 4);
+            indicator.DOLocalRotate(Vector3.forward * degree, 0.5f);
         }
 
         private void OpenLevelFailedPanel()

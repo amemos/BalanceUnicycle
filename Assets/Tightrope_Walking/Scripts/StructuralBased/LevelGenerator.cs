@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using amemo.balanceUnicycle.Globals;
@@ -36,13 +35,14 @@ namespace amemo.balanceUnicycle.levelGenerator
         private LevelObject levelEnd;
         public LevelObject LevelEnd { get { return levelEnd; } set { levelEnd = value; RegisterObjList(value); } }
 
-        //private LevelObject collectableStack;
-        private LevelObject collectableStack; //{ get { return collectableStack; } set { collectableStack = value; RegisterObjList(value); } }
+        private LevelObject collectableStack; 
 
         [SerializeField]
         private List<LevelObject> levelObjects;
 
         private int levelIndex = 0;
+
+        List<int> dummyCollectableStackCount = new List<int> { 7, 9, -3, 11, -8, 12, 8, 9, -5, -6, 12, -7, 13, -10, 8, -2 };
 
         private void OnEnable()
         {
@@ -69,7 +69,6 @@ namespace amemo.balanceUnicycle.levelGenerator
         }
 
 
-        List<int> dummyCollectableStackCount = new List<int> { 7, 9, -3, 12, -8, 16, 8, 10, -5, -6, 12, -7, 15, -11, 8, -5};
         private void CreateLevel(int level)
         {
             int PlatformLength = levelContents[levelIndex].PlatformLength;
@@ -88,6 +87,7 @@ namespace amemo.balanceUnicycle.levelGenerator
                 RegisterObjList(collectableStack);
                 collectableStack.GetComponent<Collectable>().SetStackCount(dummyCollectableStackCount[i]);
             }
+
         }
 
 
