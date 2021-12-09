@@ -36,8 +36,8 @@ public class StackManager : MonoBehaviour
         GameManager.Instance.StackManager = this;
         characterParent = FindObjectOfType<CharacterParent>(); //dont forget to fix this
         player = characterParent.transform.GetChild(0).GetComponent<Player>();
-        leftStackTMPro = characterParent.transform.GetChild(2).GetComponent<TextMeshPro>();
-        rightStackTMPro = characterParent.transform.GetChild(3).GetComponent<TextMeshPro>();
+        leftStackTMPro = characterParent.transform.GetChild(2).GetChild(3).GetComponent<TextMeshPro>();
+        rightStackTMPro = characterParent.transform.GetChild(2).GetChild(4).GetComponent<TextMeshPro>();
     }
 
     private void OnEnable()
@@ -104,7 +104,7 @@ public class StackManager : MonoBehaviour
                 Transform pizzaBox = ObjectPooler.SharedInstance.GetPooledObject(ObjectType.E_PIZZA_BOX).transform;
                 pizzaBox.transform.position = characterParent.rightStack[i].position;
                 pizzaBox.gameObject.SetActive(true);
-                pizzaBox.DOMoveY(-5, 0.5f).SetDelay(i * 0.07f).OnComplete(()=>
+                pizzaBox.DOMoveX(6, 0.25f).SetDelay(i * 0.07f).OnComplete(()=>
                 {
                     ObjectPooler.SharedInstance.DestroyGameObj(pizzaBox.gameObject);
                 });
@@ -123,7 +123,7 @@ public class StackManager : MonoBehaviour
                 Transform pizzaBox = ObjectPooler.SharedInstance.GetPooledObject(ObjectType.E_PIZZA_BOX).transform;
                 pizzaBox.transform.position = characterParent.leftStack[i].position;
                 pizzaBox.gameObject.SetActive(true);
-                pizzaBox.DOMoveY(-10, 0.3f).SetDelay(i * 0.05f).OnComplete(() =>
+                pizzaBox.DOMoveX(-6, 0.25f).SetDelay(i * 0.05f).OnComplete(() =>
                 {
                     ObjectPooler.SharedInstance.DestroyGameObj(pizzaBox.gameObject);
                 });
@@ -219,7 +219,7 @@ public class StackManager : MonoBehaviour
 
         EventManager.UpdateIndicator(unbalanceDegree);
 
-        if( Mathf.Abs(unbalanceDegree) > 65)
+        if( Mathf.Abs(unbalanceDegree) > failDegree)
         {
             EventManager.LevelFailed();
             gameObject.SetActive(false);
