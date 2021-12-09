@@ -69,7 +69,7 @@ namespace amemo.balanceUnicycle.levelGenerator
         }
 
 
-        List<int> dummyCollectableStackCount = new List<int> { 5, 7, -3, 2, -4, 6, 8, 10, -5, 6};
+        List<int> dummyCollectableStackCount = new List<int> { 7, 9, -3, 12, -8, 16, 8, 10, -5, -6, 12, -7, 15, -11, 8, -5};
         private void CreateLevel(int level)
         {
             int PlatformLength = levelContents[levelIndex].PlatformLength;

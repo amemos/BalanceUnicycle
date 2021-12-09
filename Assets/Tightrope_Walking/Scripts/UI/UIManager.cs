@@ -50,9 +50,11 @@ namespace amemo.balanceUnicycle.ui
 
         public void OnPointerDown(PointerEventData eventData)
         {
+            if(TapToPlayPanel.activeInHierarchy)
+                EventManager.LevelStarted(0);
+            
             TapToPlayPanel.SetActive(false);
             scaler.gameObject.SetActive(true);
-            EventManager.LevelStarted(0);
         }
 
     }

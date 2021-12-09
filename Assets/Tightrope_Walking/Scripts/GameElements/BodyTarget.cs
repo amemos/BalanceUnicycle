@@ -17,7 +17,7 @@ public class BodyTarget : MonoBehaviour
 
     private void ChangeTargetPosition(float degree)
     {
-        transform.DOMoveX(-degree / 10, 0.2f);
-        transform.DOMoveY(1.31f + -degree / 10, 0.2f);
+        transform.DOMoveX(-degree / 10, 0.5f);
+        transform.DOMoveY(1.31f + Mathf.Abs(degree) / 10, 0.5f);
     }
 }

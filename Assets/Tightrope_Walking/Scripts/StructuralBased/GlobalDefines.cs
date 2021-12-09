@@ -22,5 +22,12 @@ namespace amemo.balanceUnicycle.Globals
         E_RIGHT
     }
 
+    public enum AnimationStates
+    {
+        Ski,
+        SkiPoseRight,
+        SkiPoseLeft
+    }
+
 }
 

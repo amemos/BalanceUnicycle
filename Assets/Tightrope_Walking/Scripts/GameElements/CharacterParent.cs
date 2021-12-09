@@ -24,16 +24,16 @@ namespace amemo.balanceUnicycle.gameElements
 
         private void OnEnable()
         {
-            EventManager.onLevelStarted += x => levelStarted = true;
-            EventManager.onLevelFailed += () => levelStarted = false;
-            EventManager.onLevelCompleted += () => levelStarted = false;
+            EventManager.onLevelStarted         += x => levelStarted = true;
+            EventManager.onLevelFailed          += OnFinish;
+            EventManager.onLevelCompleted       += OnFinish;
         }
 
         private void OnDisable()
         {
-            EventManager.onLevelStarted -= x => levelStarted = true;
-            EventManager.onLevelFailed -= () => levelStarted = false;
-            EventManager.onLevelCompleted -= () => levelStarted = false;
+            EventManager.onLevelStarted         -= x => levelStarted = true;
+            EventManager.onLevelFailed          -= OnFinish;
+            EventManager.onLevelCompleted       -= OnFinish;
         }
 
         private void Update()
@@ -52,6 +52,12 @@ namespace amemo.balanceUnicycle.gameElements
             {
                 EventManager.LevelCompleted();
             }
+        }
+
+        private void OnFinish()
+        {
+            levelStarted = false;
+            enabled = false;
         }
 
 

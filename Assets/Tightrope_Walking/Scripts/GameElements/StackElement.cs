@@ -31,23 +31,17 @@ namespace amemo.balanceUnicycle.gameElements
         bool deviation;
         private void UpdateSlope(float degree)
         {
-            float step = -degree / 16;
+            float step = -degree / 40;
 
-            float angle = (stackIndex * step);
+            float angle = (2 * step);
             if (Mathf.Abs(angle) > Mathf.Abs(degree))
             {
                 angle = -degree;
-                //deviation = true;
             }
             transform.DOLocalRotate(Vector3.forward * angle, 0.2f);
 
         }
 
-        //private void LateUpdate()
-        //{
-        //    if(deviation)
-        //        transform.DOMoveX(3.5f, 0.2f);
-        //}
 
     }
 }

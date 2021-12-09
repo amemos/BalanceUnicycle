@@ -22,6 +22,7 @@ public class StackManager : MonoBehaviour
     private TextMeshPro rightStackTMPro;
 
     public CharacterParent characterParent;
+    private Player player;
 
     private LevelObject activeCollectableStack;
     private List<Transform> activeCollectables;
@@ -34,6 +35,7 @@ public class StackManager : MonoBehaviour
     {
         GameManager.Instance.StackManager = this;
         characterParent = FindObjectOfType<CharacterParent>(); //dont forget to fix this
+        player = characterParent.transform.GetChild(0).GetComponent<Player>();
         leftStackTMPro = characterParent.transform.GetChild(2).GetComponent<TextMeshPro>();
         rightStackTMPro = characterParent.transform.GetChild(3).GetComponent<TextMeshPro>();
     }
