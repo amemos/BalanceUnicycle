@@ -6,6 +6,12 @@ using UnityEngine.InputSystem;
 
 namespace amemo.balanceUnicycle.structurals.inputs
 {
+    /// <summary>
+    /// InputManager was designed to handle Unity New Input System.  
+    ///     
+    ///  created by: Ahmet Þentürk
+    /// </summary>
+    /// 
     [DefaultExecutionOrder(-2)]
     public class InputManager : Singleton<InputManager>
     {

@@ -2,30 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using amemo.balanceUnicycle.Globals;
-
-/// <summary>
-///  Pool-Object-Pattern provides that all game objects are created at initial. It is flexible as being expanded while necessary.
-///  In run-time memory filling and deletion processes are blocked and memory spikes are destroyed.
-///  
-///  created by: Ahmet Şentürk
-/// </summary>
-/// 
+using amemo.balanceUnicycle.structurals.Singleton;
 
 namespace amemo.balanceUnicycle.structurals.pooler
 {
-    public class ObjectPooler : MonoBehaviour
+    /// <summary>
+    ///  Pool-Object-Pattern provides that all game objects are created at initial. It is flexible as being expanded while necessary.
+    ///  In run-time memory filling and deletion processes are blocked and avoiding memory spikes is aimed.
+    ///  
+    ///  created by: Ahmet Şentürk
+    /// </summary>
+    /// 
+
+    public class ObjectPooler : Singleton<ObjectPooler>
     {
-        public static ObjectPooler SharedInstance;
 
         public List<ObjectPoolItem> itemsToPool;
 
         public List<GameObject> pooledObjects;
-
-        void Awake()
-        {
-            SharedInstance = this;
-        }
-
 
         void Start()
         {

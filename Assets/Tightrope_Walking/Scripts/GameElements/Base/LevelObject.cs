@@ -4,6 +4,14 @@ using UnityEngine;
 
 namespace amemo.balanceUnicycle.Globals
 {
+    /// <summary>
+    ///  LevelObject is the base class of level items such as player, obstacles, platforms...
+    ///  Init method implementation was obliged and is called in base awake. When the object created and assigned the first position is kept as initial position.
+    ///  This base class was created to implement common specifications virtually. 
+    ///  
+    ///  created by: Ahmet Þentürk
+    /// </summary>
+    /// 
     public abstract class LevelObject : BaseMonoBehaviour, IInitHandler
     {
         protected ObjectType objectType;

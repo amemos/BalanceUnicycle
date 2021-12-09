@@ -2,15 +2,19 @@ using amemo.balanceUnicycle.Globals;
 using amemo.balanceUnicycle.structurals;
 using amemo.balanceUnicycle.structurals.events;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace amemo.balanceUnicycle.gameElements
 {
+    [DefaultExecutionOrder(-2)]
     public class CharacterParent : LevelObject
     {
         [SerializeField]
         private float speed = 1.0f;
 
+        public TextMeshPro leftStackTMPro;
+        public TextMeshPro rightStackTMPro;
         public List<Transform> rightStack;
         public List<Transform> leftStack;
         public Transform stick;

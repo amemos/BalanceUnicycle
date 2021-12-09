@@ -2,6 +2,12 @@ using UnityEngine;
 
 namespace amemo.balanceUnicycle.structurals.Singleton
 {
+    /// <summary>
+    ///  Generic Singleton template.
+    ///  
+    ///  created by: Ahmet Þentürk
+    /// </summary>
+    /// 
     public class Singleton<T> : BaseMonoBehaviour where T : BaseMonoBehaviour
     {
         private static T _instance;

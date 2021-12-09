@@ -7,7 +7,6 @@ namespace amemo.balanceUnicycle.gameElements
 {
     public class Obstacle : LevelObject
     {
-
         public override void Init()
         {
             objectType = ObjectType.E_PLATFORM;

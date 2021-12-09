@@ -7,8 +7,9 @@ using UnityEngine;
 namespace amemo.balanceUnicycle.structurals.events
 {
     /// <summary>
-    ///  EventManager was designed with Observer Pattern rules. when added event were triggered, only somewhere interested with the event are notified.
+    ///  EventManager was designed by Observer Pattern rules. When added event were triggered, only somewhere subscribed to the action are notified.
     ///  By using c# Action property, one or more parameter was passed to subscribers was provided.
+    ///  Note: Don't forget to unsubscribe in OnDisable or OnDestroy;
     ///  
     ///  created by: Ahmet Şentürk
     /// </summary>

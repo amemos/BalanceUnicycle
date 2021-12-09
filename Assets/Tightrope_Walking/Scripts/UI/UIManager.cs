@@ -18,7 +18,6 @@ namespace amemo.balanceUnicycle.ui
         [SerializeField]
         RectTransform indicator;
 
-
         private void OnEnable()
         {
             EventManager.onLevelCompleted += OpenLevelCompletedPanel;

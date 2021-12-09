@@ -1,8 +1,16 @@
 using amemo.balanceUnicycle.gameElements;
 using amemo.balanceUnicycle.structurals.Singleton;
+using UnityEngine;
 
 namespace amemo.balanceUnicycle.structurals
 {
+    /// <summary>
+    ///  GameManager is a singleton class. Sub-manager actions are evaluated here. Model object is initialized and memory read/write commands are managed by GameManager. 
+    ///     
+    ///  created by: Ahmet Þentürk
+    /// </summary>
+    /// 
+    [DefaultExecutionOrder(-5)]
     public class GameManager : Singleton<GameManager>
     {
         private StackManager stackManager;
@@ -15,6 +23,8 @@ namespace amemo.balanceUnicycle.structurals
             set
             {
                 stackManager = value;
+                stackManager.characterParent = characterParent;
+                stackManager.player = player;
             }
         }
 
@@ -29,9 +39,24 @@ namespace amemo.balanceUnicycle.structurals
             set
             {
                 characterParent = value;
-                stackManager.characterParent = value;
+                
             }
         }
+
+        private Character player;
+
+        public Character Player
+        {
+            get 
+            {
+                return player; 
+            }
+            set 
+            { 
+                player = value; 
+            }
+        }
+
 
 
 

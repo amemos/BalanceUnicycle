@@ -7,6 +7,13 @@ using amemo.balanceUnicycle.structurals.pooler;
 
 namespace amemo.balanceUnicycle.levelGenerator
 {
+    /// <summary>
+    ///  LevelGenerator aims to place level objects to right positions in the scene. All created items register themselves to a list. Therefore, destroying and creating levels get easier.
+    ///  To avoid memory spikes, instead of loading a scene, objects are called from the pool. (Object-Pool-Pattern)
+    ///  
+    ///  created by: Ahmet Þentürk
+    /// </summary>
+    /// 
     public class LevelGenerator : MonoBehaviour
     {
         [SerializeField]
@@ -60,9 +67,9 @@ namespace amemo.balanceUnicycle.levelGenerator
         {
             levelObjects = new List<LevelObject>();
 
-            LevelStart = ObjectPooler.SharedInstance.GetPooledObject(ObjectType.E_LEVELSTART).GetComponent<LevelObject>();
-            Platform = ObjectPooler.SharedInstance.GetPooledObject(ObjectType.E_PLATFORM).GetComponent<LevelObject>();
-            LevelEnd = ObjectPooler.SharedInstance.GetPooledObject(ObjectType.E_LEVELEND).GetComponent<LevelObject>();
+            LevelStart = ObjectPooler.Instance.GetPooledObject(ObjectType.E_LEVELSTART).GetComponent<LevelObject>();
+            Platform = ObjectPooler.Instance.GetPooledObject(ObjectType.E_PLATFORM).GetComponent<LevelObject>();
+            LevelEnd = ObjectPooler.Instance.GetPooledObject(ObjectType.E_LEVELEND).GetComponent<LevelObject>();
 
             CreateLevel(levelIndex);
 
@@ -82,7 +89,7 @@ namespace amemo.balanceUnicycle.levelGenerator
 
             for (int i = 0; i < StackCount; i++)
             {
-                collectableStack = ObjectPooler.SharedInstance.GetPooledObject(ObjectType.E_COLLECTABLE).GetComponent<LevelObject>();
+                collectableStack = ObjectPooler.Instance.GetPooledObject(ObjectType.E_COLLECTABLE).GetComponent<LevelObject>();
                 collectableStack.SetPosition(referenceTr.position + Vector3.forward * Distance * (i + 1) + Vector3.down * 3.0f);
                 RegisterObjList(collectableStack);
                 collectableStack.GetComponent<Collectable>().SetStackCount(dummyCollectableStackCount[i]);
@@ -98,7 +105,7 @@ namespace amemo.balanceUnicycle.levelGenerator
 
         private void DestroyLevelObject(LevelObject levelObject)
         {
-            ObjectPooler.SharedInstance.DestroyGameObj(levelObject.gameObject);
+            ObjectPooler.Instance.DestroyGameObj(levelObject.gameObject);
         }
 
         public void DestroyLevel()
