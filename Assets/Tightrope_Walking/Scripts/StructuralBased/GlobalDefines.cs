@@ -10,8 +10,16 @@ namespace amemo.balanceUnicycle.Globals
         E_PLATFORM,
         E_OBSTACLE,
         E_COLLECTABLE,
+        E_PIZZA_BOX,
         E_LEVELSTART,
         E_LEVELEND
+    }
+
+
+    public enum StackSide
+    {
+        E_LEFT,
+        E_RIGHT
     }
 
 }

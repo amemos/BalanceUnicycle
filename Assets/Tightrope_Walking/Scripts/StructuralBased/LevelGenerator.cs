@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using amemo.balanceUnicycle.Globals;
+using amemo.balanceUnicycle.gameElements;
 
 namespace amemo.balanceUnicycle.levelGenerator
 {
@@ -67,6 +68,7 @@ namespace amemo.balanceUnicycle.levelGenerator
         }
 
 
+        List<int> dummyCollectableStackCount = new List<int> { 5, 7, -3, 2, -4, 6, 8, 10, -5, 6};
         private void CreateLevel(int level)
         {
             int PlatformLength = levelContents[levelIndex].PlatformLength;
@@ -83,6 +85,7 @@ namespace amemo.balanceUnicycle.levelGenerator
                 collectableStack = ObjectPooler.SharedInstance.GetPooledObject(ObjectType.E_COLLECTABLE).GetComponent<LevelObject>();
                 collectableStack.SetPosition(referenceTr.position + Vector3.forward * Distance * (i + 1) + Vector3.down * 3.0f);
                 RegisterObjList(collectableStack);
+                collectableStack.GetComponent<Collectable>().SetStackCount(dummyCollectableStackCount[i]);
             }
         }
 

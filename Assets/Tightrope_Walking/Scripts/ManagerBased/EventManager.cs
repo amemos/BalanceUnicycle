@@ -15,8 +15,9 @@ public class EventManager
     public static Action                        onReactBack;
     public static Action<LevelObject, bool>     onCollectableStackTrigger;
     public static Action<Vector2>               onSwipe;
+    public static Action<float>                 onIndicatorUpdate;
     public static Action<int>                   onLevelStarted;
-    public static Action<int>                   onLevelCompleted;
+    public static Action                        onLevelCompleted;
     public static Action                        onLevelFailed;
     public static Action                        onLevelEnded;
 
@@ -36,9 +37,14 @@ public class EventManager
         if (onLevelStarted != null) onLevelStarted(level);
     }
 
-    public static void LevelCompleted(int xIndex)
+    public static void UpdateIndicator(float degree)
     {
-        if (onLevelCompleted != null) onLevelCompleted(xIndex);
+        if (onIndicatorUpdate != null) onIndicatorUpdate(degree);
+    }
+
+    public static void LevelCompleted()
+    {
+        if (onLevelCompleted != null) onLevelCompleted();
     }
 
     public static void LevelFailed()

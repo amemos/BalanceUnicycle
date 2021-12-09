@@ -18,17 +18,21 @@ namespace amemo.balanceUnicycle.gameElements
 
         private int stackCount;
 
+        public bool IsCollected = false;
+
         public override void Init()
         {
             objectType = ObjectType.E_COLLECTABLE;
-
-            stackCount = Random.Range(1, 16);
-
         }
 
         public int GetStackCount()
         {
             return stackCount;
+        }
+
+        public void SetStackCount(int val)
+        {
+            this.stackCount = val;
         }
 
         private void EnablePizzaBoxes(int count)
@@ -42,6 +46,11 @@ namespace amemo.balanceUnicycle.gameElements
             {
                 pizzaBoxes[i].gameObject.SetActive(true);
             }
+        }
+
+        public void DisableTMPro()
+        {
+            textMeshPro.enabled = false;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -59,6 +68,8 @@ namespace amemo.balanceUnicycle.gameElements
             if (other.gameObject.TryGetComponent(out CharacterParent characterParent))
             {
                 EventManager.OnCollectableStackTrigger(this, false);
+                if (!IsCollected)
+                    EventManager.LevelFailed();
             }
         }
     }

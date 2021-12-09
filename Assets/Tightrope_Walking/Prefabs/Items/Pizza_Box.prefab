@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 93549367257713471}
   - component: {fileID: 3955146950085756058}
-  - component: {fileID: 1227079697494716496}
+  - component: {fileID: 5353541588857302177}
+  - component: {fileID: 7582480561582459603}
   m_Layer: 0
   m_Name: Pizza_Box
   m_TagString: Untagged
@@ -40,7 +41,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 722698049342378373}
   m_Mesh: {fileID: -7877720897891916706, guid: a804b8a631595f74b807b9810d6547f4, type: 3}
---- !u!23 &1227079697494716496
+--- !u!23 &5353541588857302177
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -81,3 +82,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7582480561582459603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722698049342378373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 618595cf5c01bca4b829030aeb1e12af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stackIndex: 0
+  stackSide: 0
