@@ -50,18 +50,18 @@ namespace amemo.balanceUnicycle.structurals
 
         private void OnEnable()
         {
-            EventManager.onCollectableStackTrigger += OnCollectableStackTrigger;
-            EventManager.onSwipe += OnSwipe;
-            EventManager.onLevelCompleted += () => enabled = false;
-            EventManager.onLevelFailed += () => enabled = false;
+            EventManager.onCollectableStackTrigger      += OnCollectableStackTrigger;
+            EventManager.onSwipe                        += OnSwipe;
+            EventManager.onLevelCompleted               += () => enabled = false;
+            EventManager.onLevelFailed                  += () => enabled = false;
         }
 
         private void OnDisable()
         {
-            EventManager.onCollectableStackTrigger -= OnCollectableStackTrigger;
-            EventManager.onSwipe -= OnSwipe;
-            EventManager.onLevelCompleted -= () => enabled = false;
-            EventManager.onLevelFailed -= () => enabled = false;
+            EventManager.onCollectableStackTrigger      -= OnCollectableStackTrigger;
+            EventManager.onSwipe                        -= OnSwipe;
+            EventManager.onLevelCompleted               -= () => enabled = false;
+            EventManager.onLevelFailed                  -= () => enabled = false;
         }
 
 
@@ -110,9 +110,9 @@ namespace amemo.balanceUnicycle.structurals
                     if (rightStackIndex == 0)
                         break;
                     Transform pizzaBox = ObjectPooler.Instance.GetPooledObject(ObjectType.E_PIZZA_BOX).transform;
-                    pizzaBox.transform.position = characterParent.rightStack[i].position;
+                    pizzaBox.transform.position = characterParent.rightStack[0].position;
                     pizzaBox.gameObject.SetActive(true);
-                    pizzaBox.DOMoveX(6, 0.25f).SetDelay(i * 0.07f).OnComplete(() =>
+                    pizzaBox.DOMoveY(-6, 0.65f).SetDelay(i * 0.02f).OnComplete(() =>
                     {
                         ObjectPooler.Instance.DestroyGameObj(pizzaBox.gameObject);
                     });
@@ -129,9 +129,9 @@ namespace amemo.balanceUnicycle.structurals
                     if (leftStackIndex == 0)
                         break;
                     Transform pizzaBox = ObjectPooler.Instance.GetPooledObject(ObjectType.E_PIZZA_BOX).transform;
-                    pizzaBox.transform.position = characterParent.leftStack[i].position;
+                    pizzaBox.transform.position = characterParent.leftStack[0].position;
                     pizzaBox.gameObject.SetActive(true);
-                    pizzaBox.DOMoveX(-6, 0.25f).SetDelay(i * 0.05f).OnComplete(() =>
+                    pizzaBox.DOMoveY(-6, 0.65f).SetDelay(i * 0.02f).OnComplete(() =>
                     {
                         ObjectPooler.Instance.DestroyGameObj(pizzaBox.gameObject);
                     });
@@ -159,7 +159,7 @@ namespace amemo.balanceUnicycle.structurals
             int index = 0;
             foreach (var item in stackCollectable)
             {
-                item.DOMove(refPos + Vector3.up * 0.1f * index, 0.2f + 0.03f * index).OnComplete(() =>
+                item.DOMove(refPos /*+ Vector3.up * 0.1f * index*/, 0.2f + 0.03f * index).OnComplete(() =>
                 {
                     ObjectPooler.Instance.DestroyGameObj(item.gameObject);
                 });
